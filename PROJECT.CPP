@@ -34,6 +34,7 @@ void Insert()
 	    else if(d.RoomNo>dtemp.RoomNo && inserted==0)
 	    {
 		ftemp.write((char*)&dtemp,sizeof(dtemp));
+		ftemp.write((char*)&d,sizeof(d));
 		inserted=1;
 	    }
 	    else
