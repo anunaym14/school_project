@@ -1,7 +1,6 @@
 #include <iostream.h>
 #include <fstream.h>
 #include <stdio.h>
-#include <process.h>
 #include <conio.h>
 
 fstream f,ftemp;
