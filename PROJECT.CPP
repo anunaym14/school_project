@@ -1,6 +1,8 @@
 #include <iostream.h>
 #include <fstream.h>
 #include <stdio.h>
+#include <process.h>
+#include <conio.h>
 
 fstream f,ftemp;
 
@@ -9,13 +11,14 @@ class Details
     public:
 	    int RoomNo;
 	    char CName[20];
-	    long CMobNo;
+	    long int CMobNo;
 }d,dtemp;
 
 void Insert()
 {
-    int inserted=0, first=1;
-    ftemp.open("temp.dat",ios::out);
+    int inserted=0, first=1, closed=0;
+    f.open("data.txt",ios::in);
+    ftemp.open("temp.txt",ios::out);
     cout<< endl <<"Enter Room No. : ";
     cin>>dtemp.RoomNo;
     if(dtemp.RoomNo>=101 && dtemp.RoomNo<=110)
@@ -24,12 +27,12 @@ void Insert()
        gets(dtemp.CName);
        cout<< "Enter Customer's Mobile No. : ";
        cin>>dtemp.CMobNo;
-       while(!f.eof())
-       {    first=0;
-	    f.read((char*)&d,sizeof(d));
+       while(f.read((char*)&d,sizeof(d)))
+       {
+	    first=0;
 	    if(d.RoomNo==dtemp.RoomNo)
 	    {
-		cout<<"Room Already Full";
+		    cout<<"Room Already Full";
 	    }
 	    else if(d.RoomNo>dtemp.RoomNo && inserted==0)
 	    {
@@ -44,20 +47,23 @@ void Insert()
        }
        if(first==1)
        {
-	    f.seekg(0);
 	    ftemp.write((char*)&dtemp,sizeof(dtemp));
        }
        ftemp.close();
        f.close();
-       remove("data.dat");
-       rename("temp.dat","data.dat");
-       f.open("data.dat",ios::in);
+       remove("data.txt");
+       rename("temp.txt","data.txt");
+       closed=1;
     }
-    else
+   else
     {
 	cout<<"No such room in the Hotel.";
     }
-    
+    if(closed==0)
+    {
+	f.close();
+	ftemp.close();
+    }
 }
 
 void Modify()
@@ -65,7 +71,7 @@ void Modify()
     f.seekg(0);
     int modified=0;
     char surem;
-    ftemp.open("temp.dat",ios::out);
+    ftemp.open("temp.txt",ios::out);
     cout<<"Modify Details of Room No. : ";
     cin>>dtemp.RoomNo;
     if(dtemp.RoomNo>=101 && dtemp.RoomNo<=110)
@@ -110,9 +116,9 @@ void Modify()
        }
        f.close();
        ftemp.close();
-       remove("data.dat");
-       rename("temp.dat","data.dat");
-       f.open("data.dat",ios::in);   
+       remove("data.txt");
+       rename("temp.txt","data.txt");
+       f.open("data.txt",ios::in);   
     }
     else
     {
@@ -125,7 +131,7 @@ void Delete()
     f.seekg(0);
     int notfound=1;
     char sured;
-    ftemp.open("temp.dat",ios::out);
+    ftemp.open("temp.txt",ios::out);
     cout<< "Details to be deleted of Room No. : ";
     cin>>dtemp.RoomNo;
     if(dtemp.RoomNo>=101 && dtemp.RoomNo<=110)
@@ -164,9 +170,9 @@ void Delete()
 	}
     f.close();
     ftemp.close();
-    remove("data.dat");
-    rename("temp.dat","data.dat");
-    f.open("data.dat",ios::in); 
+    remove("data.txt");
+    rename("temp.txt","data.txt");
+    f.open("data.txt",ios::in); 
     }
     else
     {
@@ -207,14 +213,15 @@ void Search()
 int main()
 {
     int choice=0;
-    f.open("data.dat",ios::in);
+    f.open("data.txt",ios::in);
     if(!f)
     {
 	f.close();
-	f.open("data.dat",ios::out);
+	f.open("data.txt",ios::out);
 	f.close();
-	f.open("data.dat",ios::in);
+	f.open("data.txt",ios::in);
     }
+    f.close();
     while(choice!=5)
     {
 	cout << "MENU" << endl << "1. Insert Record" << endl << "2. Modify Record" << endl << "3. Delete Record" << endl << "4. Show Records" << endl << "5. Exit" << endl << "Choice : ";
@@ -235,7 +242,5 @@ int main()
 	}
 	cout<<endl<<endl;
     }
-    f.close();
     return 0;
 }
-
