@@ -219,7 +219,7 @@ void Search()
 	    f.read((char*)&d,sizeof(d));
 	    if(dtemp.RoomNo==d.RoomNo)
 	    {
-		cout<< "Room No. : "<< d.RoomNo << endl << "Customer's Name : ";
+		cout<< "Customer's Name : ";
 		puts(d.CName);
 		cout<< endl << "Customer's Mobile No. : " << d.CMobNo;
 		found=1;
