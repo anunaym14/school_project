@@ -144,11 +144,12 @@ void Delete()
     cout<< "Details to be deleted of Room No. : ";
     cin>>dtemp.RoomNo;
     if(dtemp.RoomNo>=101 && dtemp.RoomNo<=110)
-    {   while(f.read((char*)&d,sizeof(d)))
+    {   
+	while(f.read((char*)&d,sizeof(d)))
 	{
 	    if(dtemp.RoomNo!=d.RoomNo)
 	    {
-		ftemp.write((char*)&dtemp,sizeof(dtemp));
+		ftemp.write((char*)&d,sizeof(d));
 	    }
 	    else
 	    {
