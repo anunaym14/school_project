@@ -15,7 +15,7 @@ class Details
 
 void Insert()
 {
-    int inserted=0, first=1, closed=0;
+    int inserted=0, first=1, closedi=0;
     f.open("data.txt",ios::in);
     ftemp.open("temp.txt",ios::out);
     cout<< endl <<"Enter Room No. : ";
@@ -52,13 +52,13 @@ void Insert()
        f.close();
        remove("data.txt");
        rename("temp.txt","data.txt");
-       closed=1;
+       closedi=1;
     }
    else
     {
 	cout<<"No such room in the Hotel.";
     }
-    if(closed==0)
+    if(closedi==0)
     {
 	f.close();
 	ftemp.close();
@@ -66,9 +66,10 @@ void Insert()
 }
 
 void Modify()
-{
+{	
+    f.open("data.txt",ios::in);	
     f.seekg(0);
-    int modified=0;
+    int modified=0, closedm=0;
     char surem;
     ftemp.open("temp.txt",ios::out);
     cout<<"Modify Details of Room No. : ";
@@ -117,18 +118,24 @@ void Modify()
        ftemp.close();
        remove("data.txt");
        rename("temp.txt","data.txt");
-       f.open("data.txt",ios::in);   
+       closedm=1;	
     }
     else
     {
 	cout<<"No such room in the Hotel.";
     }
+    if(closedm==0)
+    {
+    	f.close();
+    	ftemp.close();
+    }
 }
 
 void Delete()
 {   
+    f.open("data.txt",ios::in);			
     f.seekg(0);
-    int notfound=1;
+    int notfound=1, closedd=0;
     char sured;
     ftemp.open("temp.txt",ios::out);
     cout<< "Details to be deleted of Room No. : ";
@@ -171,16 +178,22 @@ void Delete()
     ftemp.close();
     remove("data.txt");
     rename("temp.txt","data.txt");
-    f.open("data.txt",ios::in); 
+    closedd=1; 
     }
     else
     {
 	cout<< "No such room in the Hotel.";
     }
+    if(closedd==0)
+    {
+	f.close();
+	ftemp.close();
+    }	
 }
 
 void Search()
 {
+    f.open("data.txt",ios::in);
     f.seekg(0);
     int found=0;
     cout<< "Details required of Room No. : ";
@@ -207,6 +220,7 @@ void Search()
     {
         cout<< "No such room in the Hotel.";
     }
+    f.close();		
 }
 
 int main()
