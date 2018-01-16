@@ -48,6 +48,10 @@ void Insert()
        {
 	    ftemp.write((char*)&dtemp,sizeof(dtemp));
        }
+       if(inserted==0)
+       {
+	       ftemp.write((char*)&dtemp,sizeof(dtemp));
+       }
        ftemp.close();
        f.close();
        remove("data.txt");
