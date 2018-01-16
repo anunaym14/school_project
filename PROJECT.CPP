@@ -84,9 +84,8 @@ void Modify()
        gets(dtemp.CName);
        cout<< "Enter Customer's Mobile No. : ";
        cin>>dtemp.CMobNo;
-       while(!f.eof())
+       while(f.read((char*)&d,sizeof(d)))
        {
-	    f.read((char*)&d,sizeof(d));
 	    if(d.RoomNo==dtemp.RoomNo)
 	    {
 		cout<< "Are you sure you want to modify? (Y/N) : ";
@@ -145,9 +144,8 @@ void Delete()
     cout<< "Details to be deleted of Room No. : ";
     cin>>dtemp.RoomNo;
     if(dtemp.RoomNo>=101 && dtemp.RoomNo<=110)
-    {   while(!f.eof())
+    {   while(f.read((char*)&d,sizeof(d)))
 	{
-	    f.read((char*)&d,sizeof(d));
 	    if(dtemp.RoomNo!=d.RoomNo)
 	    {
 		ftemp.write((char*)&dtemp,sizeof(dtemp));
