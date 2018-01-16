@@ -251,7 +251,7 @@ int main()
     f.close();
     while(choice!=5)
     {
-	cout << "MENU" << endl << "1. Insert Record" << endl << "2. Modify Record" << endl << "3. Delete Record" << endl << "4. Show Records" << endl << "5. Exit" << endl << "Choice : ";
+	cout << "MENU" << endl << "1. Insert Record" << endl << "2. Modify Record" << endl << "3. Delete Record" << endl << "4. Search Records" << endl << "5. Exit" << endl << "Choice : ";
 	cin >> choice;
 	switch(choice)
 	{
