@@ -22,10 +22,6 @@ void Insert()
     cin>>dtemp.RoomNo;
     if(dtemp.RoomNo>=101 && dtemp.RoomNo<=110)
     {
-       cout<< "Enter Customer's Name : ";
-       gets(dtemp.CName);
-       cout<< "Enter Customer's Mobile No. : ";
-       cin>>dtemp.CMobNo;
        while(f.read((char*)&d,sizeof(d)))
        {
 	    first=0;
@@ -35,6 +31,10 @@ void Insert()
 	    }
 	    else if(d.RoomNo>dtemp.RoomNo && inserted==0)
 	    {
+		cout<< "Enter Customer's Name : ";
+       		gets(dtemp.CName);
+       		cout<< "Enter Customer's Mobile No. : ";
+       		cin>>dtemp.CMobNo;
 		ftemp.write((char*)&dtemp,sizeof(dtemp));
 		ftemp.write((char*)&d,sizeof(d));
 		inserted=1;
@@ -46,10 +46,19 @@ void Insert()
        }
        if(first==1)
        {
+            cout<< "Enter Customer's Name : ";
+            gets(dtemp.CName);
+            cout<< "Enter Customer's Mobile No. : ";
+       	    cin>>dtemp.CMobNo;
 	    ftemp.write((char*)&dtemp,sizeof(dtemp));
+	    inserted=1;   
        }
        if(inserted==0)
-       {
+       {	
+	       cout<< "Enter Customer's Name : ";
+               gets(dtemp.CName);
+               cout<< "Enter Customer's Mobile No. : ";
+               cin>>dtemp.CMobNo;
 	       ftemp.write((char*)&dtemp,sizeof(dtemp));
        }
        ftemp.close();
@@ -86,7 +95,7 @@ void Modify()
        cin>>dtemp.CMobNo;
        while(f.read((char*)&d,sizeof(d)))
        {
-	    if(d.RoomNo==dtemp.RoomNo)
+	    if(d.RoomNo==dtemp.RoomNo && modified==0)
 	    {
 		cout<< "Are you sure you want to modify? (Y/N) : ";
 		cin>>surem;
@@ -107,6 +116,7 @@ void Modify()
 			ftemp.write((char*)&d,sizeof(d));
 		    }
 		}
+		    
 	    }
 	    else
 	    {
@@ -212,6 +222,7 @@ void Search()
 		puts(d.CName);
 		cout<< endl << "Customer's Mobile No. : " << d.CMobNo;
 		found=1;
+		break;
             }
         }
         if(found==0)
