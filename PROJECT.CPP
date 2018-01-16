@@ -28,6 +28,7 @@ void Insert()
 	    if(d.RoomNo==dtemp.RoomNo)
 	    {
 		    cout<<"Room Already Full";
+		    inserted=1;
 	    }
 	    else if(d.RoomNo>dtemp.RoomNo && inserted==0)
 	    {
