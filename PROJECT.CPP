@@ -217,13 +217,12 @@ void Search()
 	while(!f.eof())
 	{
 	    f.read((char*)&d,sizeof(d));
-	    if(dtemp.RoomNo==d.RoomNo)
+	    if(dtemp.RoomNo==d.RoomNo && found==0)
 	    {
 		cout<< "Customer's Name : ";
 		puts(d.CName);
 		cout<< endl << "Customer's Mobile No. : " << d.CMobNo;
 		found=1;
-		break;
             }
         }
         if(found==0)
