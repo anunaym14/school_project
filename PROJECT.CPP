@@ -214,9 +214,8 @@ void Search()
     cin>>dtemp.RoomNo;
     if(dtemp.RoomNo>=101 && dtemp.RoomNo<=110)
     {
-	while(!f.eof())
+	while(f.read((char*)&d,sizeof(d)))
 	{
-	    f.read((char*)&d,sizeof(d));
 	    if(dtemp.RoomNo==d.RoomNo && found==0)
 	    {
 		cout<< "Customer's Name : ";
